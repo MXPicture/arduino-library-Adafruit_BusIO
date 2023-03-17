@@ -3,9 +3,9 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <PicI2CSoft.h> // https://github.com/MXPicture/arduino-library-i2c-soft
+#include <PicI2C.h> // https://github.com/MXPicture/arduino-library-i2c
 
-using pic_i2soft::SoftTwoWire;
+using pic_i2c::SoftTwoWire;
 
 #include "Adafruit_I2CDevice.h"
 
