@@ -5,14 +5,14 @@
 #include <Wire.h>
 #include <PicI2C.h> // https://github.com/MXPicture/arduino-library-i2c
 
-using pic_i2c::SoftTwoWire;
+using pic_i2c::SoftI2C;
 
 #include "Adafruit_I2CDevice.h"
 
 ///< The class which defines how we will talk to this device over I2C
 class Adafruit_I2CDeviceSoft: public Adafruit_I2CDevice {
 public:
-    Adafruit_I2CDeviceSoft(uint8_t addr, SoftTwoWire* theWire)
+    Adafruit_I2CDeviceSoft(uint8_t addr, SoftI2C* theWire)
         : Adafruit_I2CDevice(addr),
         _softWire(theWire) {
 
@@ -126,7 +126,7 @@ public:
     };
 
 protected:
-    SoftTwoWire* _softWire;
+    SoftI2C* _softWire;
 
     inline bool _read(uint8_t* buffer, size_t len, bool stop) override {
 #if defined(TinyWireM_h)
