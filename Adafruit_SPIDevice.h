@@ -22,8 +22,8 @@ typedef uint8_t SPIClass;
     defined(ARDUINO_AVR_ATmega4808) || defined(ARDUINO_AVR_ATmega3209) ||      \
     defined(ARDUINO_AVR_ATmega3208) || defined(ARDUINO_AVR_ATmega1609) ||      \
     defined(ARDUINO_AVR_ATmega1608) || defined(ARDUINO_AVR_ATmega809) ||       \
-    defined(ARDUINO_AVR_ATmega808) || defined(ARDUINO_ARCH_ARC32) ||           \
-    defined(EPOXY_DUINO)
+    defined(EPOXY_DUINO) || \
+    defined(ARDUINO_AVR_ATmega808) || defined(ARDUINO_ARCH_ARC32)
 
 typedef enum _BitOrder {
   SPI_BITORDER_MSBFIRST = MSBFIRST,
@@ -86,30 +86,30 @@ class Adafruit_SPIDevice {
 public:
 #ifdef BUSIO_HAS_HW_SPI
   Adafruit_SPIDevice(int8_t cspin, uint32_t freq = 1000000,
-    BusIOBitOrder dataOrder = SPI_BITORDER_MSBFIRST,
-    uint8_t dataMode = SPI_MODE0, SPIClass* theSPI = &SPI);
+                     BusIOBitOrder dataOrder = SPI_BITORDER_MSBFIRST,
+                     uint8_t dataMode = SPI_MODE0, SPIClass *theSPI = &SPI);
 #else
   Adafruit_SPIDevice(int8_t cspin, uint32_t freq = 1000000,
-    BusIOBitOrder dataOrder = SPI_BITORDER_MSBFIRST,
-    uint8_t dataMode = SPI_MODE0, SPIClass* theSPI = nullptr);
+                     BusIOBitOrder dataOrder = SPI_BITORDER_MSBFIRST,
+                     uint8_t dataMode = SPI_MODE0, SPIClass *theSPI = nullptr);
 #endif
   Adafruit_SPIDevice(int8_t cspin, int8_t sck, int8_t miso, int8_t mosi,
-    uint32_t freq = 1000000,
-    BusIOBitOrder dataOrder = SPI_BITORDER_MSBFIRST,
-    uint8_t dataMode = SPI_MODE0);
+                     uint32_t freq = 1000000,
+                     BusIOBitOrder dataOrder = SPI_BITORDER_MSBFIRST,
+                     uint8_t dataMode = SPI_MODE0);
   ~Adafruit_SPIDevice();
 
   bool begin(void);
-  bool read(uint8_t* buffer, size_t len, uint8_t sendvalue = 0xFF);
-  bool write(const uint8_t* buffer, size_t len,
-    const uint8_t* prefix_buffer = nullptr, size_t prefix_len = 0);
-  bool write_then_read(const uint8_t* write_buffer, size_t write_len,
-    uint8_t* read_buffer, size_t read_len,
-    uint8_t sendvalue = 0xFF);
-  bool write_and_read(uint8_t* buffer, size_t len);
+  bool read(uint8_t *buffer, size_t len, uint8_t sendvalue = 0xFF);
+  bool write(const uint8_t *buffer, size_t len,
+             const uint8_t *prefix_buffer = nullptr, size_t prefix_len = 0);
+  bool write_then_read(const uint8_t *write_buffer, size_t write_len,
+                       uint8_t *read_buffer, size_t read_len,
+                       uint8_t sendvalue = 0xFF);
+  bool write_and_read(uint8_t *buffer, size_t len);
 
   uint8_t transfer(uint8_t send);
-  void transfer(uint8_t* buffer, size_t len);
+  void transfer(uint8_t *buffer, size_t len);
   void beginTransaction(void);
   void endTransaction(void);
   void beginTransactionWithAssertingCS();
@@ -117,11 +117,11 @@ public:
 
 private:
 #ifdef BUSIO_HAS_HW_SPI
-  SPIClass* _spi = nullptr;
-  SPISettings* _spiSetting = nullptr;
+  SPIClass *_spi = nullptr;
+  SPISettings *_spiSetting = nullptr;
 #else
-  uint8_t* _spi = nullptr;
-  uint8_t* _spiSetting = nullptr;
+  uint8_t *_spi = nullptr;
+  uint8_t *_spiSetting = nullptr;
 #endif
   uint32_t _freq;
   BusIOBitOrder _dataOrder;
@@ -130,7 +130,7 @@ private:
 
   int8_t _cs, _sck, _mosi, _miso;
 #ifdef BUSIO_USE_FAST_PINIO
-  BusIO_PortReg* mosiPort, * clkPort, * misoPort, * csPort;
+  BusIO_PortReg *mosiPort, *clkPort, *misoPort, *csPort;
   BusIO_PortMask mosiPinMask, misoPinMask, clkPinMask, csPinMask;
 #endif
   bool _begun;
