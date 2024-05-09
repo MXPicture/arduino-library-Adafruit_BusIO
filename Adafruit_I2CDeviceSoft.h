@@ -16,10 +16,12 @@ public:
         : Adafruit_I2CDevice(addr),
         _softWire(theWire) {
 
-#ifdef ARDUINO_ARCH_SAMD
+#if defined(ARDUINO_ARCH_SAMD)
         this->_maxBufferSize = 250; // as defined in Wire.h's RingBuffer
 #elif defined(ESP32)
         this->_maxBufferSize = I2C_BUFFER_LENGTH;
+#elif defined(ARDUINO_ARCH_RENESAS)
+        this->_maxBufferSize = 255; // as defined in Wire.h's RingBuffer
 #else
         this->_maxBufferSize = 32;
 #endif
