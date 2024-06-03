@@ -18,7 +18,8 @@ public:
 
 #if defined(ARDUINO_ARCH_SAMD)
         this->_maxBufferSize = 250; // as defined in Wire.h's RingBuffer
-#elif defined(ESP32)
+#elif defined(ESP32) \
+  || defined(ARDUINO_ARCH_ESP32)
         this->_maxBufferSize = I2C_BUFFER_LENGTH;
 #elif defined(ARDUINO_ARCH_RENESAS)
         this->_maxBufferSize = 255; // as defined in Wire.h's RingBuffer

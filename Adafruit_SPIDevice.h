@@ -31,7 +31,8 @@ typedef enum _BitOrder {
   SPI_BITORDER_LSBFIRST = LSBFIRST,
 } BusIOBitOrder;
 
-#elif defined(ESP32) || defined(__ASR6501__) || defined(__ASR6502__)
+#elif defined(ESP32) || defined(__ASR6501__) || defined(__ASR6502__) \
+  || defined(ARDUINO_ARCH_ESP32)
 
 // some modern SPI definitions don't have BitOrder enum and have different SPI
 // mode defines
@@ -68,7 +69,8 @@ typedef uint8_t BusIO_PortMask;
 #define BUSIO_USE_FAST_PINIO
 
 #elif defined(ESP8266) || defined(ESP32) || defined(__SAM3X8E__) ||            \
-    defined(ARDUINO_ARCH_SAMD)
+    defined(ARDUINO_ARCH_SAMD) \
+    || defined(ARDUINO_ARCH_ESP32)
 typedef volatile uint32_t BusIO_PortReg;
 typedef uint32_t BusIO_PortMask;
 #define BUSIO_USE_FAST_PINIO
