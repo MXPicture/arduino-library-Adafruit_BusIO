@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <PicI2C.h> // https://github.com/MXPicture/arduino-library-i2c
+#include <SoftI2C.h> // https://github.com/MXPicture/arduino-library-i2c
 
 using pic_i2c::SoftI2C;
 
